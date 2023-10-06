@@ -1,0 +1,460 @@
+openapi: 3.0.3
+info:
+  title: Grocery App - OpenAPI 3.0
+  description: |-
+    This is the api documentation for the grocery store application. as part of the Modern Application Development 1 Project by Nivedhaa Srikanth . 
+  version: 1.0.11
+servers:
+  - url: http://127.0.0.1:5000/
+tags:
+  - name: product
+    description: Add, Delete, Update and Get products.
+  - name: category
+    description: Add Delete, Update and Get categories.
+  - name: cart
+    description: Add Delete, Update and Get cart products.
+
+paths:
+  /products:
+    get:
+      tags:
+        - product
+      summary: Get all the stores products
+      description: Get all the stores products as a list of dictionaries
+      operationId: getProduct
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '405':
+          description: Invalid input
+    post:
+      tags:
+        - product
+      summary: Add a new product to the store
+      description: Add a new product to the store
+      operationId: addProduct
+      requestBody:
+        description: Create a new product in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '409':
+          description: Product with this name already exists
+
+  /product/{product_id}:
+    get:
+      tags:
+        - product
+      summary: Get product by ID
+      description: Returns a single product
+      operationId: getproductById
+      parameters:
+        - name: product_id
+          in: path
+          description: ID of product to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Missing argument, all arguments are required.
+        '404':
+          description: Product not found
+          
+    delete:
+      tags:
+        - product
+      summary: Deletes a product
+      description: delete a product
+      operationId: deleteproduct
+      parameters:
+        - name: product_id
+          in: path
+          description: product id to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Product not found
+          
+    put:
+      tags:
+        - product
+      summary: Updates a product
+      description: Update a product by id from url args
+      operationId: putproductById
+      parameters:
+        - name: product_id
+          in: path
+          description: ID of product to update
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Missing argument, all arguments are required.
+
+  
+  /category:
+    post:
+      tags:
+        - category
+      summary: Add a new category
+      description: Adds a new category
+      operationId: addCategory
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Category name is required and should be a string
+        '409':
+          description: Category already exists
+          
+  /category/{category_id}:
+    get:
+      tags:
+        - category
+      summary: Get category by ID
+      description: Returns a single category
+      operationId: getcategoryById
+      parameters:
+        - name: category_id
+          in: path
+          description: ID of category to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Missing argument, all arguments are required.
+        '404':
+          description: category not found
+    put:
+      tags:
+        - category
+      summary: Updates a category
+      description: Update a category by ID from url args
+      operationId: putCategory
+      parameters:
+        - name: category_id
+          in: path
+          description: ID of category to update
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Category name is required and should be a string
+        '404':
+          description: Category not found
+    delete:
+      tags:
+        - category
+      summary: Delete category by ID
+      description: Deletes a category by ID
+      operationId: deleteCategory
+      parameters:
+        - name: category_id
+          in: path
+          description: ID of the category that needs to be deleted
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Category not found
+    
+  /cart:
+    post:
+      tags:
+        - cart
+      summary: Add a new cart
+      description: Adds a new cart
+      operationId: addcart
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Cart'
+          
+  /cart/{cart_id}:
+    get:
+      tags:
+        - cart
+      summary: Get cart by ID
+      description: Returns a single cart
+      operationId: getcartById
+      parameters:
+        - name: cart_id
+          in: path
+          description: ID of cart to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: cart not found
+    put:
+      tags:
+        - cart
+      summary: Update a cart by ID
+      description: Updates a cart by ID
+      operationId: putcart
+      parameters:
+        - name: cart_id
+          in: path
+          description: ID of cart to update
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: cart not found
+    delete:
+      tags:
+        - cart
+      summary: Delete cart by ID
+      description: Deletes a cart by ID
+      operationId: deletecart
+      parameters:
+        - name: cart_id
+          in: path
+          description: ID of the cart that needs to be deleted
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: cart not found
+  
+components:
+  schemas:
+    Product:
+      required:
+        - name
+        - product_id
+        - price
+        - category_id
+        - description
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        name:
+          type: string
+          example: amul butter
+        price:
+          type: number
+          example: 280.4
+        desctiption:
+          type: string
+          example: amul butter
+        category_id:
+          $ref: '#/components/schemas/Category'
+        stock:
+          type: integer
+          example: 10
+          
+      xml:
+        name: Product
+        
+    Category:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Fruits and Vegetables
+      xml:
+        name: category
+        
+    Cart:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        user_id:
+          type: integer
+          example: 1
+        product_id:
+          type: integer
+          example: 1
+        quantity:
+          type: integer
+          example: 3
+      xml:
+        name: cart
+        
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        user_id:
+          type: integer
+          example: 1
+        order_date:
+          type: integer
+          example: "10/12/2023"
+        quantity:
+          type: integer
+          example: 3
+      xml:
+        name: cart
+        
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        userame:
+          type: string
+          example: John
+        password:
+          type: string
+          example: '12345'
+        email:
+          type: string
+          example: john@email.com
+        address:
+          type: string
+          example: 'any st, mountain view, Chennai-600077'
+
+      xml:
+        name: user
+        
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    Product:
+      description: Product object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Product'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'

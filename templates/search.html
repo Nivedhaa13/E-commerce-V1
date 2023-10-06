@@ -1,0 +1,30 @@
+{% extends "user_dashboard.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            {% if products %}
+                {% for product in products %}
+                    <div class="col-md-3 mt-30">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 style="text-align: center;">{{ product.name }}</h5>
+                                <p style="text-align: center;"><br>Price: ₹{{ product.price }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between">
+                                    <a href="" class="btn btn-sm btn-dark">Details</a>
+                                    <a href="" class="btn btn-sm btn-dark">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-md-12 mt-30">
+                    <p style="text-align: center;">No products found.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

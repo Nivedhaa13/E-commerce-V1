@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashbaord</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/duotone.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"/>
+    <script src="https://kit.fontawesome.com/ce7bb6f6c7.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-nav">
+    <nav class="navbar navbar-expand-lg navbar-dark new-bg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user_dashboard" style="font-size: x-large; color: white;"  >Home</a>
+                </li>
+            </ul>
+        </div>
+        <form class="form-inline search-form">
+            <div class="input-group">
+                    <a href="/view_cart" style="color: white; font-size: x-large;">
+                        <i class="fa-sharp fa-solid fa-cart-shopping me-3 cart-icon"></i>
+                    </a>
+                <input class="form-control r" type="search" placeholder="Search" aria-label="Search" value="{{ request.args.get('q', '') }}">
+                <div class="input-group-append">
+                    <button class="btn btn-light search-button" type="submit">
+                        <i class="fas fa-search search-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        
+        
+
+    <ul class="navbar-nav ml-auto">
+        <b><a class="nav-link" href="/" style="color: white;"> Logout</a></b>
+    </ul>
+    </nav>
+    <h1 style="text-align: center; padding-top: 1%;">Cart Items</h1>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            {% if cart_items %}
+            <form method="post" class="d-flex justify-content-center">
+                <table class="table table-hover table-bordered td">
+                    <tr>
+                        <th style="background-color: black; color: grey;">Product Name</th>
+                        <th style="background-color: black; color: grey">Price</th>
+                        <th style="background-color: black; color: grey">Quantity</th>
+                        <th style="background-color: black; color: grey">Update</th>
+                        <th style="background-color: black; color: grey">Delete</th>
+                    </tr>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>₹{{ item.product.price }}</td>
+                            <td>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="quantity{{ item.product.id }}" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="hidden" name="_method" value="post"> 
+                                <button type="submit" class="btn btn-link" style="color: black; padding: 0; text-decoration: underline;">Update</button>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('delete_cart_item', product_id=item.product.id) }}" style="color: black;">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
+            <form action="/empty_cart" method="post" class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-sm btn-danger">Empty Cart</button>
+            </form>
+            {% else %}
+                <div class="col-md-12 mt-30">
+                    <p style="text-align: center;">Your cart is empty.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-6">
+                <form action="/user_dashboard" method="get">
+                    <button type="submit" class="btn btn-sm btn-dark">Add more products</button>
+                </form>
+            </div>
+            <div class="col-6 text-end">
+                <form action="/payment" method="get">
+                    <button type="submit" class="btn btn-sm btn-dark">Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

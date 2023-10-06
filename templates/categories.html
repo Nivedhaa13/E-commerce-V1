@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashbaord</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body class="bg-nav">
+    <nav class="navbar">
+        <a href="/admin_dashboard" class="navbar-brand text-light">
+            Grocery App
+        </a>
+    </nav>
+    <h1 style="text-align: center; padding-top: 1%;">Category List</h1>
+    <div class="table-container table2">
+        <br>
+        <table class="table table-hover table-bordered td" id="product-table">
+                <tr>
+                    <th style="background-color: black; color: grey">Category ID</th>
+                    <th style="background-color: black; color: grey">Category Name</th>
+                    <th style="background-color: black; color: grey">Product Name</th>
+                    <th style="background-color: black; color: grey">Edit</th>
+                    <th style="background-color: black; color: grey">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                {% for product in category.products %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>
+                        <a href="{{ url_for('update_category', category_id=category.id) }}" style="color: black; text-decoration: none;">Update</a>
+                    </td>
+                    <td>
+                        <form method="post" action="{{ url_for('delete_category', category_id=category.id) }}" onsubmit="return confirm('Are you sure you want to delete this category?')">
+                            <button type="submit" class="btn btn-link" style="color: black; text-decoration: none;">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+        {% endfor %}
+            </tbody>
+        </table>
+        
+        <h3> <button type="submit" class="btn btn-dark"><a href="/add_category" style="color: aliceblue;">Add new Categories</a></h3></button>
+        <h3> <button type="submit" class="btn btn-dark"><a href="/add_products" style="color: aliceblue;">Add new Products</a></h3></button>
+    </div>
+</body>
+</html>

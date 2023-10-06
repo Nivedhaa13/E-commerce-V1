@@ -1,0 +1,152 @@
+.bg-nav{
+    background: #BBD2C5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #292E49, #536976, #BBD2C5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #292E49, #536976, #BBD2C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+.mt-50{
+    margin-top: 20%;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33vh;
+}
+.icon-container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.icon-container a i {
+    font-size: 80px;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+}
+
+.table1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+}
+
+h3{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+}
+
+h4{
+    display: flex;
+    justify-content: right;
+}
+
+.topnav-right {
+    float: right;
+  }
+.box {
+    padding: auto;;
+    width: 180px;
+    height: 53px;
+    font-size: 20px;
+    color: aliceblue;
+    background:none;
+    border:none;
+    margin-right: 10px;
+  }
+.new-bg{
+
+    background: black;
+    
+    }
+
+.navbar-nav {
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar-nav.ml-auto {
+    margin-left: auto;
+}
+
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form .form-control {
+    margin-right: 5px;
+}
+
+.mt-30 {
+    margin-top: 4%;
+}
+.search-icon {
+    font-size: 25px;
+}
+
+.search-button {
+    height: 40px;
+    padding: 0 12px;
+}
+.td{
+    text-align: center;
+}
+footer {
+    background-color: black;
+    padding: 15px 0;
+    color: aliceblue;
+}
+
+footer h2 {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+footer p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.payment-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.payment-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1rem;
+    text-decoration: none;
+    color: black;
+}
+
+.payment-icon {
+    font-size: 48px;
+    margin-bottom: 0.5rem;
+}
+.icon-container1 {
+    background-color: #f8f9fa;
+    padding: 30px;
+  }
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body class="bg-nav">
+    <nav class="navbar">
+        <a href="/" class="navbar-brand text-light">
+            Grocery App
+        </a>
+    </nav>
+    <h1 style="text-align: center; padding-top: 5%;">Admin Log In</h1>
+    <div class="container form">
+        <form method="POST" action="{{ url_for('admin_login') }}">
+            <b><label for="username">Username</label></p></b><p>
+            <input type="text" class="form-control" name="username"> <br>
+            
+            <b><p><label for="password">Password</label></p></b>
+            <input type="password" class="form-control" name="password"> <br>
+            <p><input type="submit" class="btn btn-dark" value="Login"></p>
+            <a href="/" style="color: black;">Return to Homepage</a>
+        </form>
+    </div>
+</body>
+</html>
